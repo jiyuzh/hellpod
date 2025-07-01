@@ -57,6 +57,6 @@ cond_install systemd-firstboot systemd
 cond_install systemd-nspawn systemd-container
 
 # network we use
-cond_install virsh libvirt-clients
+cond_install virsh libvirt-daemon
 
 echo "+ Environment check passed"

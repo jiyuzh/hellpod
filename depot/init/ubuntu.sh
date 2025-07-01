@@ -29,7 +29,7 @@ while ! ping -c 1 -W 1 google.com &> /dev/null; do
 	sleep 1
 done
 
-if [ ! -f /etc/ssh/sshd_config ]; then
+if [ ! -f /etc/ssh/sshd_config.d/10-permit-root-login.conf ]; then
 
 	# only keep top-level packages
 	sudo apt-mark showmanual | xargs -L1 -- sh -c 'apt-cache --installed rdepends "$1" | grep -v "$1" | grep -qv "Reverse Depends:" > /dev/null && sudo apt-mark auto "$1" || true' --
@@ -54,7 +54,7 @@ if [ ! -f /etc/ssh/sshd_config ]; then
 	sudo systemctl stop ssh || true
 
 	# enable root login via ssh
-	cat /etc/ssh/sshd_config | perl -pe 's/^\s*#?\s*PermitRootLogin\s+[-\w]+$/PermitRootLogin prohibit-password/gm' | sudo tee /etc/ssh/sshd_config > /dev/null
+	echo "PermitRootLogin prohibit-password" | sudo tee /etc/ssh/sshd_config.d/10-permit-root-login.conf > /dev/null
 
 	# import ssh key
 	ssh-import-id "$SSH_FROM"
