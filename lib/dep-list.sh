@@ -1,5 +1,9 @@
 #!/usr/bin/env false
 
+#
+# List of dependencies for distros
+#
+
 function ubuntu_prep
 {
 	if ! apt_probe; then
@@ -9,18 +13,22 @@ function ubuntu_prep
 		return 0
 	fi
 
-	dep_check apt \
+	dep_check apt binary \
+		arch dirname env mkdir = coreutils , \
+		dpkg dpkg-deb = dpkg , \
 		git = git , \
-		systemd-nspawn = systemd-container systemd , \
-		systemd-firstboot = systemd , \
-		virsh = libvirt-clients , \
+		grep = grep , \
+		machinectl systemd-nspawn = systemd-container , \
+		networkctl systemd-firstboot = systemd , \
 		debootstrap = debootstrap , \
+		sl = wget , \
 	;
 }
 
+# Prep function for all other distros, this function must present
 function other_prep
 {
-	dep_check other \
-		systemd-firstboot systemd-nspawn virsh , \
+	dep_check other binary \
+		systemd-firstboot systemd-nspawn virsh git debootstrap , \
 	;
 }

@@ -1,6 +1,10 @@
 #!/usr/bin/env false
 
 #
+# Wrappers for package managers
+#
+
+#
 # Debian/Ubuntu
 #
 
