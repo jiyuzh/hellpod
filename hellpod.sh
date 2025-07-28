@@ -27,3 +27,7 @@ sudo -v
 HELLPOD_DIR="$(dirname "$(realpath -e "${BASH_SOURCE[0]:-$0}")")"
 
 builtin source "$HELLPOD_DIR/lib/dep.sh"
+
+
+prep_dep
+
