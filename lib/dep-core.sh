@@ -4,6 +4,7 @@
 # Framework
 #
 
+# Core logic for dep_check. Do not invoke directly.
 function dep_check_core
 {
 	local action_stage="$1"

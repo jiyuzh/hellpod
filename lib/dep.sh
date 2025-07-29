@@ -6,13 +6,13 @@ builtin source "$HELLPOD_DIR/lib/dep-list.sh"
 builtin source "$HELLPOD_DIR/lib/dep-dist.sh"
 
 # Setup software dependencies
-function prep_dep
+function dep_main
 {
 	local distro="$(detect_distro)"
 
-	if [[ $(builtin type -t "${distro}_prep") == function ]]; then
-		"${distro}_prep"
+	if [[ $(builtin type -t "${distro}_dist_prep") == function ]]; then
+		"${distro}_dist_prep"
 	else
-		other_prep
+		other_dist_prep
 	fi
 }
