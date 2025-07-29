@@ -51,11 +51,15 @@ function get_debootstrap
 function run_debootstrap
 {
 	local dir="$1"
-	shift
+	local sys="$2"
+	local env="$3"
 
 	get_debootstrap "$dir"
 
 	# --arch shall be explicitly defined for non-deb systems, as per Fedora docunment
 	# --keep-debootstrap-dir is semi-undocumented (in changelog only), it allows us to work in a non-empty folder
-	sudo env DEBOOTSTRAP_DIR="$dir" "$dir/debootstrap" --arch=$(dpkg --print-architecture) --keep-debootstrap-dir "$@"
+	sudo env DEBOOTSTRAP_DIR="$dir" "$dir/debootstrap" --arch=$(dpkg --print-architecture) --keep-debootstrap-dir "$sys" "$env"
+
+	# migrate the generated debootstrap execution snapshot files (due to --keep-debootstrap-dir)
+	sudo mv -T "$env/debootstrap/" "$dir/debootstrap.conf/"
 }
