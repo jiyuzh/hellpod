@@ -61,5 +61,5 @@ function run_debootstrap
 	sudo env DEBOOTSTRAP_DIR="$dir" "$dir/debootstrap" --arch=$(dpkg --print-architecture) --keep-debootstrap-dir "$sys" "$env"
 
 	# migrate the generated debootstrap execution snapshot files (due to --keep-debootstrap-dir)
-	sudo mv -T "$env/debootstrap/" "$dir/debootstrap.conf/"
+	sudo mv -T "$env/debootstrap/" "$dir/../debootstrap.conf/"
 }
