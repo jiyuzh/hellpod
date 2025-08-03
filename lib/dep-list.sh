@@ -14,7 +14,7 @@ function ubuntu_dist_prep
 	fi
 
 	dep_check apt binary \
-		arch dirname env ls mkdir realpath = coreutils , \
+		arch dd dirname env ln ls mkdir realpath test = coreutils , \
 		bash = bash , \
 		dpkg dpkg-deb = dpkg , \
 		git = git , \

@@ -45,7 +45,7 @@ sudo -v
 ENV_NAME="$1"
 shift
 
-ENV_PATH="$1"
+ENV_PATH=$(realpath -m "$1")
 shift
 
 # distro by default is Ubuntu 24.04 LTS
@@ -72,8 +72,10 @@ HELLPOD_DIR="$(dirname "$(realpath -e "${BASH_SOURCE[0]:-$0}")")"
 
 builtin source "$HELLPOD_DIR/lib/dep.sh"
 builtin source "$HELLPOD_DIR/lib/env.sh"
+builtin source "$HELLPOD_DIR/lib/vmx.sh"
 
-dep_main
-env_main "$ENV_NAME" "$ENV_DIST" "$ENV_PATH"
+# dep_main
+# env_main "$ENV_NAME" "$ENV_DIST" "$ENV_PATH"
+vmx_main "$ENV_NAME" "$ENV_DIST" "$ENV_PATH"
 
 echo "Done"
